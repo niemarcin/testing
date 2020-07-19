@@ -1,0 +1,120 @@
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0;37msort_ut is a Catch v2.13.0 host application.
+Run with -? for options
+
+[0m-------------------------------------------------------------------------------
+[0mScenario: Vector should be sorted
+[0m[0m      Given: Vector v and expected = {1, 2, 3}
+       When: Vector v is sorted ascending
+       Then: Vector v { 123} should be equal to expected
+[0m-------------------------------------------------------------------------------
+[0;37msorting.ut.cpp:110
+...............................................................................
+
+[0m[0;37msorting.ut.cpp:111: [0m[0;32mPASSED:
+[0m[0;36m  REQUIRE_THAT( v, Catch::Matchers::Equals(expected) )
+[0mwith expansion:
+[1;33m  { 1, 2, 3 } Equals: { 1, 2, 3 }
+[0m
+-------------------------------------------------------------------------------
+[0mScenario: Vector should be sorted
+[0m[0m      Given: Vector v and expected = {1, 2, 3}
+       When: Vector v is sorted ascending
+       Then: Vector v { 123} should be equal to expected
+[0m-------------------------------------------------------------------------------
+[0;37msorting.ut.cpp:110
+...............................................................................
+
+[0m[0;37msorting.ut.cpp:111: [0m[0;32mPASSED:
+[0m[0;36m  REQUIRE_THAT( v, Catch::Matchers::Equals(expected) )
+[0mwith expansion:
+[1;33m  { 1, 2, 3 } Equals: { 1, 2, 3 }
+[0m
+-------------------------------------------------------------------------------
+[0mScenario: Vector should be sorted
+[0m[0m      Given: Vector v and expected = {1, 2, 3}
+       When: Vector v is sorted ascending
+       Then: Vector v { 123} should be equal to expected
+[0m-------------------------------------------------------------------------------
+[0;37msorting.ut.cpp:110
+...............................................................................
+
+[0m[0;37msorting.ut.cpp:111: [0m[0;32mPASSED:
+[0m[0;36m  REQUIRE_THAT( v, Catch::Matchers::Equals(expected) )
+[0mwith expansion:
+[1;33m  { 1, 2, 3 } Equals: { 1, 2, 3 }
+[0m
+-------------------------------------------------------------------------------
+[0mScenario: Vector should be sorted
+[0m[0m      Given: Vector v and expected = {1, 2, 3}
+       When: Vector v is sorted ascending
+       Then: Vector v { 123} should be equal to expected
+[0m-------------------------------------------------------------------------------
+[0;37msorting.ut.cpp:110
+...............................................................................
+
+[0m[0;37msorting.ut.cpp:111: [0m[0;32mPASSED:
+[0m[0;36m  REQUIRE_THAT( v, Catch::Matchers::Equals(expected) )
+[0mwith expansion:
+[1;33m  { 1, 2, 3 } Equals: { 1, 2, 3 }
+[0m
+-------------------------------------------------------------------------------
+[0mScenario: Vector should be sorted
+[0m[0m      Given: Vector v = {3,2,1,4} and expected = {4,3,2,1}
+       When: Vector v is sorted ascending
+       Then: Vector v should be equal to expected
+[0m-------------------------------------------------------------------------------
+[0;37msorting.ut.cpp:124
+...............................................................................
+
+[0m[0;37msorting.ut.cpp:125: [0m[0;32mPASSED:
+[0m[0;36m  REQUIRE_THAT( v, Catch::Matchers::Equals(expected) )
+[0mwith expansion:
+[1;33m  { 4, 3, 2, 1 } Equals: { 4, 3, 2, 1 }
+[0m
+-------------------------------------------------------------------------------
+[0mScenario: Vector should be sorted
+[0m[0m      Given: vectors v and expected with one element
+       When: vector v is sorted
+       Then: v is equal to expected
+[0m-------------------------------------------------------------------------------
+[0;37msorting.ut.cpp:153
+...............................................................................
+
+[0m[0;37msorting.ut.cpp:154: [0m[0;32mPASSED:
+[0m[0;36m  REQUIRE_THAT( v, Catch::Matchers::Equals(expected) )
+[0mwith expansion:
+[1;33m  { 1 } Equals: { 1 }
+[0m
+-------------------------------------------------------------------------------
+[0mScenario: Vector should be sorted
+[0m[0m      Given: A string text
+       When: string text is sorted
+       Then: string text should be equal to expected
+[0m-------------------------------------------------------------------------------
+[0;37msorting.ut.cpp:166
+...............................................................................
+
+[0m[0;37msorting.ut.cpp:167: [0m[0;32mPASSED:
+[0m[0;36m  REQUIRE_THAT( text, Catch::Matchers::Equals(expected) )
+[0mwith expansion:
+[1;33m  "ettx" equals: "ettx"
+[0m
+-------------------------------------------------------------------------------
+[0mScenario: Vector should be sorted
+[0m[0m      Given: A string tExT
+       When: string text is sorted
+       Then: string text should be equal to expected
+[0m-------------------------------------------------------------------------------
+[0;37msorting.ut.cpp:179
+...............................................................................
+
+[0m[0;37msorting.ut.cpp:180: [0m[0;32mPASSED:
+[0m[0;36m  REQUIRE_THAT( text, Catch::Matchers::Equals(expected) )
+[0mwith expansion:
+[1;33m  "ETtx" equals: "ETtx"
+[0m
+[1;31m[0m[1;33m[0m[1;32m===============================================================================[0m
+[1;32mAll tests passed[0m (8 assertions in 1 test case)
+
