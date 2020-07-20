@@ -18,11 +18,11 @@ ___
 
 ___
 
-## Bowling - nowy projekt
+## Bowling 🎳 - nowy projekt
 
-Obejrzyj [wideo Uncle Boba o TDD ](https://trello-attachments.s3.amazonaws.com/5b20ebcd819b419f2d65c274/5b5d70bf109bc670f6d8d10d/90fb5c9305b6e8092df116da1c845210/fm_CleanCode-E6-P2-540p.mp4).
+Obejrzyj [wideo Uncle Boba o TDD](https://trello-attachments.s3.amazonaws.com/5b20ebcd819b419f2d65c274/5b5d70bf109bc670f6d8d10d/90fb5c9305b6e8092df116da1c845210/fm_CleanCode-E6-P2-540p.mp4).
 
-Do zrozumienia punktacji gry w kręgle przydatny może być [ten opis zasad](bowling_rules.txt)
+Do zrozumienia punktacji gry w kręgle przydatny może być [ten opis zasad](bowling_rules.txt).
 
 W nowych grupach napiszcie aplikację, która będzie zliczać punkty w kręgielni.
 
@@ -31,15 +31,17 @@ ___
 
 ## Bowling 🎳
 
-Wymagania (8 XP za każde spełnione):
+### Wymagania (+10 XP za każde spełnione):
 
 * liczenie punktów cząstkowych (dla niepełnych ramek, np: `3-|X|4/|5`)
 * liczenie punktów całościowych - [opis zasad](bowling_rules.txt)
 * walidacja inputu z niepełnymi ramkami dla kilku graczy (patrz następny slajd)
 * input z wielu plików w jednym katalogu, każdy plik z kilkoma graczami reprezentuje inny tor (zalecane użycie [Filesystem library z C++17](https://en.cppreference.com/w/cpp/filesystem))
 * wyświetlanie wyników na ekranie z podziałem na tory (ze statusem gry) i graczy oraz zapis do jednego pliku (następny slajd)
-* program (main.cpp) ma przyjmować 2 parametry z linii komend. Pierwszy to katalog, w którym będą pliki txt ze stanami gier na torach, a drugi opcjonalny to plik wyjściowy, w którym mają zostać zapisane przetworzone wyniki. Jeśli drugi parametr nie zostanie podany to wyniki mają zostać wypisane na ekran. Przykład użycia: `./bowling inputDirectory results.txt`. Program oczywiście ma działać i realizować powierzone zadanie.
-* program (main.cpp) po podaniu parametru -h lub --help ma wyświetlać krótką informację o tym co robi i jak go używać (czyli punkt powyżej)
+* program (`main.cpp`) ma przyjmować 2 parametry z linii komend. Pierwszy to katalog, w którym będą pliki txt ze stanami gier na torach, a drugi opcjonalny to plik wyjściowy, w którym mają zostać zapisane przetworzone wyniki. Jeśli drugi parametr nie zostanie podany to wyniki mają zostać wypisane na ekran. Przykład użycia: `./bowling inputDirectory results.txt`. Program oczywiście ma działać i realizować powierzone zadanie.
+* program (`main.cpp`) po podaniu parametru `-h` lub `--help` ma wyświetlać krótką informację o tym co robi i jak go używać (czyli punkt powyżej)
+
+#### Dostarczenie do końca sierpnia +20 XP
 
 ___
 <!-- .slide: style="font-size: 0.8em" -->
