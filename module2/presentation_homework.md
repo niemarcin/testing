@@ -22,7 +22,7 @@ ___
 
 Obejrzyj [wideo Uncle Boba o TDD](https://trello-attachments.s3.amazonaws.com/5b20ebcd819b419f2d65c274/5b5d70bf109bc670f6d8d10d/90fb5c9305b6e8092df116da1c845210/fm_CleanCode-E6-P2-540p.mp4).
 
-Do zrozumienia punktacji gry w kręgle przydatny może być [ten opis zasad](bowling_rules.txt).
+Do zrozumienia punktacji gry w kręgle przydatny może być opis zasad. Jest on dołączony na końcu prezentacji lub dostępny [tutaj](https://github.com/coders-school/testing/blob/master/module2/bowling_rules.txt)
 
 W nowych grupach napiszcie aplikację, która będzie zliczać punkty w kręgielni.
 
@@ -34,7 +34,7 @@ ___
 ### Wymagania (+10 XP za każde spełnione):
 
 * liczenie punktów cząstkowych (dla niepełnych ramek, np: `3-|X|4/|5`)
-* liczenie punktów całościowych - [opis zasad](bowling_rules.txt)
+* liczenie punktów całościowych - [opis zasad](https://github.com/coders-school/testing/blob/master/module2/bowling_rules.txt)
 * walidacja inputu z niepełnymi ramkami dla kilku graczy (patrz następny slajd)
 * input z wielu plików w jednym katalogu, każdy plik z kilkoma graczami reprezentuje inny tor (zalecane użycie [Filesystem library z C++17](https://en.cppreference.com/w/cpp/filesystem))
 * wyświetlanie wyników na ekranie z podziałem na tory (ze statusem gry) i graczy oraz zapis do jednego pliku (następny slajd)
@@ -90,3 +90,73 @@ ___
 * każda funkcjonalność musi być przetestowana; brak testów = niespełnione wymaganie.
 * pracujcie na forkach repo `coders-school/testing`
 * po implementacji wszystkich wymagań PR do `coders-school/testing:master`
+
+___
+
+## Bowling - zasady liczenia punktów
+
+```text
+Each game, or "line" of bowling, includes ten turns,
+or "frames" for the bowler.
+
+In each frame, the bowler gets up to two tries to
+knock down all ten pins.
+
+If the first ball in a frame knocks down all ten pins,
+this is called a "strike". The frame is over. The score
+for the frame is ten plus the total of the pins knocked
+down in the next two balls.
+
+If the second ball in a frame knocks down all ten pins,
+this is called a "spare". The frame is over. The score
+for the frame is ten plus the number of pins knocked
+down in the next ball.
+
+If, after both balls, there is still at least one of the
+ten pins standing the score for that frame is simply
+the total number of pins knocked down in those two balls.
+
+If you get a spare in the last (10th) frame you get one
+more bonus ball. If you get a strike in the last (10th)
+frame you get two more bonus balls.
+These bonus throws are taken as part of the same turn.
+If a bonus ball knocks down all the pins, the process
+does not repeat. The bonus balls are only used to
+calculate the score of the final frame.
+
+The game score is the total of all frame scores.
+
+Examples:
+
+X indicates a strike
+/ indicates a spare
+- indicates a miss
+| indicates a frame boundary
+The characters after the || indicate bonus balls
+
+X|X|X|X|X|X|X|X|X|X||XX
+Ten strikes on the first ball of all ten frames.
+Two bonus balls, both strikes.
+Score for each frame == 10 + score for next two
+balls == 10 + 10 + 10 == 30
+Total score == 10 frames x 30 == 300
+
+9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||
+Nine pins hit on the first ball of all ten frames.
+Second ball of each frame misses last remaining pin.
+No bonus balls.
+Score for each frame == 9
+Total score == 10 frames x 9 == 90
+
+5/|5/|5/|5/|5/|5/|5/|5/|5/|5/||5
+Five pins on the first ball of all ten frames.
+Second ball of each frame hits all five remaining
+pins, a spare.
+One bonus ball, hits five pins.
+Score for each frame == 10 + score for next one
+ball == 10 + 5 == 15
+Total score == 10 frames x 15 == 150
+
+X|7/|9-|X|-8|8/|-6|X|X|X||81
+Total score == 167
+```
