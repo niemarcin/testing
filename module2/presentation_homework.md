@@ -10,6 +10,19 @@
 
 ___
 
+## Pytania z rozmów kwalifikacyjnych
+
+* <!-- .element: class="fragment fade-in" --> Co to są testy jednostkowe?
+* <!-- .element: class="fragment fade-in" --> Czy testy jednostkowe to testy white-box czy black-box?
+* <!-- .element: class="fragment fade-in" --> Jakie pokrycie kodu testami jest odpowiednie?
+* <!-- .element: class="fragment fade-in" --> Jakie znasz narzędzia, które obliczają pokrycie kodu testami?
+* <!-- .element: class="fragment fade-in" --> Jakie znasz frameworki do testowania?
+* <!-- .element: class="fragment fade-in" --> Który framework uważasz za najciekawszy i dlaczego?
+* <!-- .element: class="fragment fade-in" --> Jak przetestować kod, który powoduje rzucenie wyjątku?
+* <!-- .element: class="fragment fade-in" --> Jak przetestować kod, który ma powodować crash aplikacji?
+
+___
+
 ## Pre-work
 
 * Przeczytaj [GMock for Dummies](https://github.com/google/googletest/blob/master/googlemock/docs/for_dummies.md)
