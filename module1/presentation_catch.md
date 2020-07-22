@@ -53,9 +53,15 @@ ___
 
 * <!-- .element: class="fragment fade-in" --> <code>TEST_CASE( test name [, tags ] )</code>
 * <!-- .element: class="fragment fade-in" --> <code>SECTION( section name )</code>
+
+Lub
+
+* <!-- .element: class="fragment fade-in" --> <code>SCENARIO( scenario name [, tags ] )</code>
 * <!-- .element: class="fragment fade-in" --> <code>GIVEN( something )</code>
 * <!-- .element: class="fragment fade-in" --> <code>WHEN( something )</code>
 * <!-- .element: class="fragment fade-in" --> <code>THEN( something )</code>
+
+Gdzie `SCENARIO` mapuje się na `TEST_CASE`, natomiast `GIVEN`, `WHEN` i `THEN` na `SECTION`.
 
 ___
 
