@@ -1,0 +1,21 @@
+name: C++ with CMake CI
+
+on: [push, pull_request]
+
+jobs:
+  Bowling:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: mkdir bowling/build
+      run: mkdir bowling/build
+    - name: Compile
+      working-directory: bowling/build
+      run: |
+        cmake ..
+        make
+    - name: Run tests
+      working-directory: bowling/build
+      run: ctest -V
+
