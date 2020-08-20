@@ -1,4 +1,6 @@
 #include <algorithm>
+#include <iostream>
+#include <filesystem>
 
 #include "game.hpp"
 
@@ -21,6 +23,10 @@ int main(int argc, char* argv[]) {
 
     std::cout << "input dir: " << inputDirectory << "\n";
     std::cout << "output file: " << outputTextFile << "\n";
+
+    if (".txt" != std::filesystem::path(outputTextFile).extension()) {
+        std::cout << "output file should have .txt extension\n";
+    }
 
     return 0;
 }
