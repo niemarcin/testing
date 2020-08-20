@@ -6,9 +6,21 @@ bool cmdOptionExists(char** begin, char** end, const std::string& option);
 void showHelp(std::string appName);
 
 int main(int argc, char* argv[]) {
-    if (cmdOptionExists(argv, argv + argc, "-h") || cmdOptionExists(argv, argv + argc, "--help")) {
+    std::string inputDirectory{};
+    std::string outputTextFile{};
+
+    if (argc == 1 || argc > 3 || cmdOptionExists(argv, argv + argc, "-h") || cmdOptionExists(argv, argv + argc, "--help")) {
         showHelp(argv[0]);
+        return 0;
     }
+
+    inputDirectory = argv[1];
+    if (argc == 3) {
+        outputTextFile = argv[2];
+    }
+
+    std::cout << "input dir: " << inputDirectory << "\n";
+    std::cout << "output file: " << outputTextFile << "\n";
 
     return 0;
 }
