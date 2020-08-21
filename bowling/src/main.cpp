@@ -7,6 +7,7 @@
 
 bool cmdOptionExists(char** begin, char** end, const std::string& option);
 void showHelp(std::string appName);
+bool textEndsWith(std::string const &textToCheck, std::string const &ending);
 
 int main(int argc, char* argv[]) {
     std::string inputDirectory{};
@@ -26,7 +27,7 @@ int main(int argc, char* argv[]) {
     std::cout << "output file: " << outputTextFile << "\n";
 
     std::string extension{".txt"};
-    if (!outputTextFile.ends_with(extension)) {
+    if (!textEndsWith(outputTextFile, extension)) {
         std::cout << "output file should have .txt extension\n";
     }
 
@@ -48,4 +49,11 @@ void showHelp(std::string appName)
               << "Options:\n"
               << "\t-h,--help\t\tShow this help message\n"
               << std::endl;
+}
+
+bool textEndsWith(std::string const &textToCheck, std::string const &ending) {
+    if (textToCheck.length() < ending.length()) {
+        return false;
+    } 
+    return (textToCheck.substr(textToCheck.length() - ending.length()) == ending);
 }
