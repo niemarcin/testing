@@ -3,14 +3,14 @@
 #include <string>
 #include <vector>
 
-class CmdArgumentsHandler {
+class ArgumentParser {
 private:
     int argc_;
     std::vector<std::string> argv_{};
     std::string appName_{};
     
 public:
-    CmdArgumentsHandler(int argc, char** argv);
+    ArgumentParser(int argc, char** argv);
 
     std::string getAppName() const { return appName_; }
     std::string getArgument(size_t argIndex) const { return argv_[argIndex]; }

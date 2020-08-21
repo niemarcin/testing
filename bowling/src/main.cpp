@@ -2,30 +2,30 @@
 #include <iostream>
 #include <string>
 
-#include "cmdArgumentsHandler.hpp"
+#include "ArgumentParser.hpp"
 #include "game.hpp"
 
 void showHelp(std::string appName);
 
 int main(int argc, char* argv[]) {
-    CmdArgumentsHandler cmdArgHandler(argc, argv);
+    ArgumentParser ap{argc, argv};
 
-    if (argc == 1 || argc > 3 || cmdArgHandler.cmdOptionExists("-h") || cmdArgHandler.cmdOptionExists("--help")) {
-        showHelp(cmdArgHandler.getAppName());
+    if (argc == 1 || argc > 3 || ap.cmdOptionExists("-h") || ap.cmdOptionExists("--help")) {
+        showHelp(ap.getAppName());
         return 0;
     }
 
-    std::string inputDirectory = cmdArgHandler.getArgument(1);
+    std::string inputDirectory = ap.getArgument(1);
     std::string outputTextFile{};
     if (argc == 3) {
-        outputTextFile = cmdArgHandler.getArgument(2);
+        outputTextFile = ap.getArgument(2);
     }
 
     std::cout << "input dir: " << inputDirectory << "\n";
     std::cout << "output file: " << outputTextFile << "\n";
 
     std::string extension{".txt"};
-    if (!cmdArgHandler.argumentEndsWith(2, extension)) {
+    if (!ap.argumentEndsWith(2, extension)) {
         std::cout << "output file should have .txt extension\n";
     }
 
