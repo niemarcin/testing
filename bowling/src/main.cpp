@@ -1,41 +1,35 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
-#include <string_view>
 
+#include "cmdArgumentsHandler.hpp"
 #include "game.hpp"
 
-bool cmdOptionExists(char** begin, char** end, const std::string& option);
 void showHelp(std::string appName);
-bool textEndsWith(std::string const &textToCheck, std::string const &ending);
 
 int main(int argc, char* argv[]) {
-    std::string inputDirectory{};
-    std::string outputTextFile{};
+    CmdArgumentsHandler cmdArgHandler(argc, argv);
 
-    if (argc == 1 || argc > 3 || cmdOptionExists(argv, argv + argc, "-h") || cmdOptionExists(argv, argv + argc, "--help")) {
-        showHelp(argv[0]);
+    if (argc == 1 || argc > 3 || cmdArgHandler.cmdOptionExists("-h") || cmdArgHandler.cmdOptionExists("--help")) {
+        showHelp(cmdArgHandler.getAppName());
         return 0;
     }
 
-    inputDirectory = argv[1];
+    std::string inputDirectory = cmdArgHandler.getArgument(1);
+    std::string outputTextFile{};
     if (argc == 3) {
-        outputTextFile = argv[2];
+        outputTextFile = cmdArgHandler.getArgument(2);
     }
 
     std::cout << "input dir: " << inputDirectory << "\n";
     std::cout << "output file: " << outputTextFile << "\n";
 
     std::string extension{".txt"};
-    if (!textEndsWith(outputTextFile, extension)) {
+    if (!cmdArgHandler.argumentEndsWith(2, extension)) {
         std::cout << "output file should have .txt extension\n";
     }
 
     return 0;
-}
-
-bool cmdOptionExists(char** begin, char** end, const std::string& option) {
-    return std::find(begin, end, option) != end;
 }
 
 void showHelp(std::string appName)
@@ -49,11 +43,4 @@ void showHelp(std::string appName)
               << "Options:\n"
               << "\t-h,--help\t\tShow this help message\n"
               << std::endl;
-}
-
-bool textEndsWith(std::string const &textToCheck, std::string const &ending) {
-    if (textToCheck.length() < ending.length()) {
-        return false;
-    } 
-    return (textToCheck.substr(textToCheck.length() - ending.length()) == ending);
 }
