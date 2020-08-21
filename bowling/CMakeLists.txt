@@ -53,12 +53,18 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 ##Insert project source files here.##
 set(SOURCES
     ${SOURCE_DIR}/game.cpp
+    ${SOURCE_DIR}/input.cpp
+)
+
+set(TESTS
+    ${TEST_DIR}/bowling-ut.cpp
+    ${TEST_DIR}/input-ut.cpp
 )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
 
 add_executable(${PROJECT_NAME} ${SOURCE_DIR}/main.cpp)
-add_executable(${PROJECT_NAME}-ut ${TEST_DIR}/bowling-ut.cpp)
+add_executable(${PROJECT_NAME}-ut ${TESTS})
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib gtest_main)
