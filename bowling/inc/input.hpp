@@ -5,10 +5,10 @@
 
 class Input {
 public:
-    Input(const std::string& directory) 
-        : directoryPath_(std::filesystem::path(directory))
-    {};
+    Input(const std::string& directory); 
 
+    bool isValid() const { return isValid_; }
 private:
     std::filesystem::path directoryPath_;
+    bool isValid_;
 };
