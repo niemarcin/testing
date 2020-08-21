@@ -11,13 +11,24 @@ ArgumentParser::ArgumentParser(int argc, char** argv) {
     appName_ = argv_[0];
 }
 
-bool ArgumentParser::cmdOptionExists(const std::string& option) const {
-    return std::find(begin(argv_), end(argv_), option) != end(argv_);
+std::string ArgumentParser::getInputDirectory() const {
+    if (argc_ < 2) {
+        return "";
+    }
+    return argv_[1]; 
 }
 
-bool ArgumentParser::argumentEndsWith(size_t argIndex, std::string const &ending) const {
-    if (argv_[argIndex].length() < ending.length()) {
-        return false;
-    } 
-    return (argv_[argIndex].substr(argv_[argIndex].length() - ending.length()) == ending);
+std::string ArgumentParser::getOutputFileName() const {
+    if (argc_ < 3) {
+        return "";
+    }
+    return argv_[2]; 
+}
+
+bool ArgumentParser::isHelpNeeded() const {
+     return argc_ == 1 || argc_ > 3 || cmdOptionExists("-h") || cmdOptionExists("--help");
+}
+
+bool ArgumentParser::cmdOptionExists(const std::string& option) const {
+    return std::find(begin(argv_), end(argv_), option) != end(argv_);
 }

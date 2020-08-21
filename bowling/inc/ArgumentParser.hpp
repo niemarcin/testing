@@ -8,13 +8,14 @@ private:
     int argc_;
     std::vector<std::string> argv_{};
     std::string appName_{};
+
+    bool cmdOptionExists(const std::string& option) const;
     
 public:
     ArgumentParser(int argc, char** argv);
 
     std::string getAppName() const { return appName_; }
-    std::string getArgument(size_t argIndex) const { return argv_[argIndex]; }
-
-    bool cmdOptionExists(const std::string& option) const;
-    bool argumentEndsWith(size_t argIndex, std::string const &ending) const;
+    std::string getInputDirectory() const;
+    std::string getOutputFileName() const;
+    bool isHelpNeeded() const;
 };

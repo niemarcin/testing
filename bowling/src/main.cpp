@@ -10,24 +10,16 @@ void showHelp(std::string appName);
 int main(int argc, char* argv[]) {
     ArgumentParser ap{argc, argv};
 
-    if (argc == 1 || argc > 3 || ap.cmdOptionExists("-h") || ap.cmdOptionExists("--help")) {
+    if (ap.isHelpNeeded()) {
         showHelp(ap.getAppName());
         return 0;
     }
 
-    std::string inputDirectory = ap.getArgument(1);
-    std::string outputTextFile{};
-    if (argc == 3) {
-        outputTextFile = ap.getArgument(2);
-    }
+    auto inputDirectory = ap.getInputDirectory();
+    auto outputFileName = ap.getOutputFileName();
 
     std::cout << "input dir: " << inputDirectory << "\n";
-    std::cout << "output file: " << outputTextFile << "\n";
-
-    std::string extension{".txt"};
-    if (!ap.argumentEndsWith(2, extension)) {
-        std::cout << "output file should have .txt extension\n";
-    }
+    std::cout << "output file: " << outputFileName << "\n";
 
     return 0;
 }
