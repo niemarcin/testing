@@ -8,7 +8,9 @@ public:
     Input(const std::string& directory); 
 
     bool isValid() const { return isValid_; }
+    size_t getLinesNum() const { return lanesNum_; }
 private:
     std::experimental::filesystem::path directoryPath_;
     bool isValid_;
+    size_t lanesNum_;
 };
