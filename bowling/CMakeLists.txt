@@ -67,7 +67,7 @@ add_executable(${PROJECT_NAME} ${SOURCE_DIR}/main.cpp)
 add_executable(${PROJECT_NAME}-ut ${TESTS})
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
-target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib gtest_main)
+target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib gtest_main stdc++fs)
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror -Wconversion -pedantic -O3)
 target_compile_options(${PROJECT_NAME}-ut PRIVATE -Wall -Wextra -Werror -Wconversion -pedantic -O3)
