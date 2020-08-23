@@ -20,4 +20,5 @@ private:
 
     std::vector<std::string> getFileNames();
     void readLanes(const std::vector<std::string>& fileNames);
+    void readPlayers(const std::string& fileName, Lane& lane);
 };

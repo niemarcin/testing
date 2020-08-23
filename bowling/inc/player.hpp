@@ -8,12 +8,13 @@ constexpr size_t MAX_BONUS_BALLS = 2;
 
 class Player {
 public:
-    Player();
+    Player(const std::string& game);
     enum Result { strike, spare, miss };
     struct Frame {
         Result result;
         size_t pins;
     };
+
 private:
     std::string name_;
     std::array<Frame, MAX_FRAMES> frames_;

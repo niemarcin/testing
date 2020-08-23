@@ -1,13 +1,11 @@
 #include <algorithm>
+#include <fstream>
 
 #include "input.hpp"
 
 namespace fs = std::experimental::filesystem;
 
-Input::Input(const std::string& directory)
-    : directoryPath_(fs::path(directory))
-    , isValid_(false)
-{
+Input::Input(const std::string& directory) : directoryPath_(fs::path(directory)), isValid_(false) {
     if (!fs::exists(directoryPath_)) {
         return;
     }
@@ -19,8 +17,7 @@ Input::Input(const std::string& directory)
     isValid_ = true;
 };
 
-std::vector<std::string> Input::getFileNames()
-{
+std::vector<std::string> Input::getFileNames() {
     std::vector<std::string> files;
 
     for (const auto& entry : fs::directory_iterator(directoryPath_)) {
@@ -35,22 +32,31 @@ std::vector<std::string> Input::getFileNames()
     return files;
 }
 
-Lane Input::getLane(size_t index)
-{
+Lane Input::getLane(size_t index) {
     return lanes_[index];
 }
 
-void Input::readLanes(const std::vector<std::string>& fileNames)
-{
-   for (const auto& file : fileNames) {
+void Input::readLanes(const std::vector<std::string>& fileNames) {
+    for (const auto& file : fileNames) {
         size_t lastdot = file.find_last_of(".");
         std::string laneName;
         if (lastdot == std::string::npos) {
             laneName = file;
         } else {
-            laneName = file.substr(0, lastdot); 
+            laneName = file.substr(0, lastdot);
         }
         Lane lane(laneName);
+        readPlayers(file, lane);
         lanes_.push_back(lane);
-    }    
+    }
+}
+
+void Input::readPlayers(const std::string& fileName, Lane& lane) {
+    std::ifstream infile(fileName);
+    std::string line;
+
+    while (std::getline(infile, line)) {
+        Player player(line);
+        lane.addPlayer(player);
+    }
 }
