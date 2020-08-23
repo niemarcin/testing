@@ -1,6 +1,6 @@
 #include <algorithm>
 
-#include <input.hpp>
+#include "input.hpp"
 
 namespace fs = std::experimental::filesystem;
 
@@ -14,21 +14,8 @@ Input::Input(const std::string& directory)
     if (!fs::is_directory(directoryPath_)) {
         return;
     }
-
-    fileNames_ = getFileNames();
-
-    for (const auto& file : fileNames_) {
-        size_t lastdot = file.find_last_of(".");
-        std::string laneName;
-        if (lastdot == std::string::npos) {
-            laneName = file;
-        } else {
-            laneName = file.substr(0, lastdot); 
-        }
-        Lane lane(laneName);
-        lanes_.push_back(lane);
-    }    
-
+    std::vector<std::string> files = getFileNames();
+    readLanes(files);
     isValid_ = true;
 };
 
@@ -51,4 +38,19 @@ std::vector<std::string> Input::getFileNames()
 Lane Input::getLane(size_t index)
 {
     return lanes_[index];
+}
+
+void Input::readLanes(const std::vector<std::string>& fileNames)
+{
+   for (const auto& file : fileNames) {
+        size_t lastdot = file.find_last_of(".");
+        std::string laneName;
+        if (lastdot == std::string::npos) {
+            laneName = file;
+        } else {
+            laneName = file.substr(0, lastdot); 
+        }
+        Lane lane(laneName);
+        lanes_.push_back(lane);
+    }    
 }

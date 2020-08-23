@@ -16,8 +16,8 @@ public:
 private:
     std::experimental::filesystem::path directoryPath_;
     bool isValid_;
-    std::vector<std::string> fileNames_;
     std::vector<Lane> lanes_;
 
     std::vector<std::string> getFileNames();
+    void readLanes(const std::vector<std::string>& fileNames);
 };
