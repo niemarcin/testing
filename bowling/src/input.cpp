@@ -14,6 +14,7 @@ Input::Input(const std::string& directory) : directoryPath_(fs::path(directory))
     }
     std::vector<std::string> files = getFileNames();
     readLanes(files);
+    lanesNum_ = lanes_.size();
     isValid_ = true;
 };
 
@@ -32,8 +33,11 @@ std::vector<std::string> Input::getFileNames() {
     return files;
 }
 
-Lane Input::getLane(size_t index) {
-    return lanes_[index];
+std::shared_ptr<Lane> Input::getLane(size_t index) {
+    if (index < lanesNum_) {
+        return lanes_[index];
+    } 
+    return nullptr;
 }
 
 void Input::readLanes(const std::vector<std::string>& fileNames) {
@@ -47,7 +51,7 @@ void Input::readLanes(const std::vector<std::string>& fileNames) {
         }
         Lane lane(laneName);
         readPlayers(file, lane);
-        lanes_.push_back(lane);
+        lanes_.emplace_back(std::make_shared<Lane>(lane));
     }
 }
 

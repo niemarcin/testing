@@ -52,7 +52,7 @@ TEST(InputTest, ShouldReadFiles) {
 
     //THEN
     EXPECT_EQ(input.getLinesNum(), INPUT_DIRECTORY_FILES_COUNT);
-    EXPECT_EQ(input.getLane(0).getName(), LANE1_NAME);
-    EXPECT_EQ(input.getLane(1).getName(), LANE2_NAME);
-    EXPECT_EQ(input.getLane(2).getName(), LANE3_NAME);
+    EXPECT_EQ(input.getLane(0)->getName(), LANE1_NAME);
+    EXPECT_EQ(input.getLane(1)->getName(), LANE2_NAME);
+    EXPECT_EQ(input.getLane(2)->getName(), LANE3_NAME);
 }
