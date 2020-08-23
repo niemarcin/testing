@@ -12,19 +12,19 @@ Input::Input(const std::string& directory) : directoryPath_(fs::path(directory))
     if (!fs::is_directory(directoryPath_)) {
         return;
     }
-    std::vector<std::string> files = getFileNames();
+    std::vector<fs::path> files = getFiles();
     readLanes(files);
     lanesNum_ = lanes_.size();
     isValid_ = true;
 };
 
-std::vector<std::string> Input::getFileNames() {
-    std::vector<std::string> files;
+std::vector<fs::path> Input::getFiles() {
+    std::vector<fs::path> files;
 
     for (const auto& entry : fs::directory_iterator(directoryPath_)) {
         auto filename = entry.path().filename();
         if (fs::is_regular_file(entry.status())) {
-            files.push_back(filename.c_str());
+            files.push_back(entry.path());
         }
     }
     files.shrink_to_fit();
@@ -36,18 +36,19 @@ std::vector<std::string> Input::getFileNames() {
 std::shared_ptr<Lane> Input::getLane(size_t index) {
     if (index < lanesNum_) {
         return lanes_[index];
-    } 
+    }
     return nullptr;
 }
 
-void Input::readLanes(const std::vector<std::string>& fileNames) {
-    for (const auto& file : fileNames) {
-        size_t lastdot = file.find_last_of(".");
+void Input::readLanes(const std::vector<fs::path>& files) {
+    for (const auto& file : files) {
+        std::string fileName = file.filename().c_str();
+        size_t lastdot = fileName.find_last_of(".");
         std::string laneName;
         if (lastdot == std::string::npos) {
-            laneName = file;
+            laneName = fileName;
         } else {
-            laneName = file.substr(0, lastdot);
+            laneName = fileName.substr(0, lastdot);
         }
         Lane lane(laneName);
         readPlayers(file, lane);
@@ -55,10 +56,9 @@ void Input::readLanes(const std::vector<std::string>& fileNames) {
     }
 }
 
-void Input::readPlayers(const std::string& fileName, Lane& lane) {
-    std::ifstream infile(fileName);
+void Input::readPlayers(const fs::path& file, Lane& lane) {
+    std::ifstream infile(file);
     std::string line;
-
     while (std::getline(infile, line)) {
         lane.addPlayer(line);
     }
