@@ -4,13 +4,6 @@
 #include <vector>
 
 class ArgumentParser {
-private:
-    int argc_;
-    std::vector<std::string> argv_{};
-    std::string appName_{};
-
-    bool cmdOptionExists(const std::string& option) const;
-    
 public:
     ArgumentParser(int argc, char** argv);
 
@@ -18,4 +11,11 @@ public:
     std::string getInputDirectory() const;
     std::string getOutputFileName() const;
     bool isHelpNeeded() const;
+    
+private:
+    int argc_;
+    std::vector<std::string> argv_{};
+    std::string appName_{};
+
+    bool argumentExists(const std::string& option) const;
 };
