@@ -12,14 +12,14 @@ ArgumentParser::ArgumentParser(int argc, char** argv) {
 }
 
 std::string ArgumentParser::getInputDirectory() const {
-    if (argc_ < 2) {
+    if (argc_ == 1) {
         return "";
     }
     return argv_[1]; 
 }
 
 std::string ArgumentParser::getOutputFileName() const {
-    if (argc_ < 3) {
+    if (argc_ <= 2) {
         return "";
     }
     return argv_[2]; 
