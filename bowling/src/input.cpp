@@ -56,7 +56,6 @@ void Input::readPlayers(const std::string& fileName, Lane& lane) {
     std::string line;
 
     while (std::getline(infile, line)) {
-        Player player(line);
-        lane.addPlayer(player);
+        lane.addPlayer(line);
     }
 }
