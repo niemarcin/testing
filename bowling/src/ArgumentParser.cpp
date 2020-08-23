@@ -26,9 +26,9 @@ std::string ArgumentParser::getOutputFileName() const {
 }
 
 bool ArgumentParser::isHelpNeeded() const {
-     return argc_ == 1 || argc_ > 3 || cmdOptionExists("-h") || cmdOptionExists("--help");
+     return argc_ == 1 || argc_ > 3 || argumentExists("-h") || argumentExists("--help");
 }
 
-bool ArgumentParser::cmdOptionExists(const std::string& option) const {
+bool ArgumentParser::argumentExists(const std::string& option) const {
     return std::find(begin(argv_), end(argv_), option) != end(argv_);
 }
