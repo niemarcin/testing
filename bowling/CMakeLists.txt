@@ -55,7 +55,6 @@ set(SOURCES
     ${SOURCE_DIR}/game.cpp
     ${SOURCE_DIR}/input.cpp
     ${SOURCE_DIR}/player.cpp
-    ${SOURCE_DIR}/lane.cpp
 )
 
 set(TESTS

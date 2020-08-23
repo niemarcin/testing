@@ -6,6 +6,10 @@ constexpr char NON_EXISTING_PATH[] = "nonexistingPath";
 constexpr char INPUT_DIRECTORY[] = "../../test/inputTestDirectory";
 constexpr size_t INPUT_DIRECTORY_FILES_COUNT = 3;
 
+constexpr char LANE1_NAME[] = "lane1";
+constexpr char LANE2_NAME[] = "lane2";
+constexpr char LANE3_NAME[] = "lane3";
+
 TEST(InputTest, ShouldNotValidateWrongPath) {
     //GIVEN
     std::string path = NON_EXISTING_PATH;
@@ -48,5 +52,7 @@ TEST(InputTest, ShouldReadFiles) {
 
     //THEN
     EXPECT_EQ(input.getLinesNum(), INPUT_DIRECTORY_FILES_COUNT);
-
+    EXPECT_EQ(input.getLane(0).getName(), LANE1_NAME);
+    EXPECT_EQ(input.getLane(1).getName(), LANE2_NAME);
+    EXPECT_EQ(input.getLane(2).getName(), LANE3_NAME);
 }
