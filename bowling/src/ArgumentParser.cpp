@@ -5,7 +5,7 @@
 ArgumentParser::ArgumentParser(int argc, char** argv) {
     argc_ = argc;
     argv_.reserve(argc_);
-    for (int i = 0; i <argc_ ; ++i) {
+    for (int i = 0; i < argc_ ; ++i) {
         argv_.push_back(argv[i]);
     }
     appName_ = argv_[0];
