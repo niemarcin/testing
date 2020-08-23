@@ -13,4 +13,7 @@ private:
     std::experimental::filesystem::path directoryPath_;
     bool isValid_;
     size_t lanesNum_;
+    std::vector<std::string> fileNames_;
+
+    std::vector<std::string> getFileNames();
 };

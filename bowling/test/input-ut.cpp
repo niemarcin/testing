@@ -3,6 +3,8 @@
 #include "input.hpp"
 
 constexpr char NON_EXISTING_PATH[] = "nonexistingPath";
+constexpr char INPUT_DIRECTORY[] = "../../test/inputTestDirectory";
+constexpr size_t INPUT_DIRECTORY_FILES_COUNT = 3;
 
 TEST(InputTest, ShouldNotValidateWrongPath) {
     //GIVEN
@@ -35,4 +37,16 @@ TEST(InputTest, ShouldValidateDirectoryPath) {
 
     //THEN    
     EXPECT_TRUE(input.isValid());
+}
+
+TEST(InputTest, ShouldReadFiles) {
+    //GIVEN
+    std::string inputDirectory = INPUT_DIRECTORY;
+
+    //WHEN
+    Input input(inputDirectory);
+
+    //THEN
+    EXPECT_EQ(input.getLinesNum(), INPUT_DIRECTORY_FILES_COUNT);
+
 }
