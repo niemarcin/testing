@@ -5,7 +5,7 @@
 
 namespace fs = std::experimental::filesystem;
 
-Input::Input(const std::string& directory) : directoryPath_(fs::path(directory)), isValid_(false), lanes_({}) {
+Input::Input(const std::string& directory) : directoryPath_(fs::path(directory)), isValid_(false), lanes_({0}) {
     if (!fs::exists(directoryPath_)) {
         return;
     }
@@ -19,7 +19,7 @@ Input::Input(const std::string& directory) : directoryPath_(fs::path(directory))
 };
 
 std::vector<fs::path> Input::getFiles() {
-    std::vector<fs::path> files{};
+    std::vector<fs::path> files{0};
 
     for (const auto& entry : fs::directory_iterator(directoryPath_)) {
         auto filename = entry.path().filename();
