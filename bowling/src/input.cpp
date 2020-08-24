@@ -19,7 +19,7 @@ Input::Input(const std::string& directory) : directoryPath_(fs::path(directory))
 };
 
 std::vector<fs::path> Input::getFiles() {
-    std::vector<fs::path> files;
+    std::vector<fs::path> files{};
 
     for (const auto& entry : fs::directory_iterator(directoryPath_)) {
         auto filename = entry.path().filename();
