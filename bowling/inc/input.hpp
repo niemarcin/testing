@@ -17,7 +17,7 @@ public:
 private:
     std::experimental::filesystem::path directoryPath_;
     bool isValid_;
-    std::vector<std::shared_ptr<Lane>> lanes_{};
+    std::vector<std::shared_ptr<Lane>> lanes_;
     size_t lanesNum_;
 
     std::vector<std::experimental::filesystem::path> getFiles();

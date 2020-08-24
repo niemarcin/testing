@@ -5,7 +5,7 @@
 
 namespace fs = std::experimental::filesystem;
 
-Input::Input(const std::string& directory) : directoryPath_(fs::path(directory)), isValid_(false) {
+Input::Input(const std::string& directory) : directoryPath_(fs::path(directory)), isValid_(false), lanes_({}) {
     if (!fs::exists(directoryPath_)) {
         return;
     }
