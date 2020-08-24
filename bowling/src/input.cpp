@@ -3,8 +3,6 @@
 
 #include "input.hpp"
 
-#include <iostream>
-
 namespace fs = std::experimental::filesystem;
 
 Input::Input(const std::string& directory) : directoryPath_(fs::path(directory)), isValid_(false) {
@@ -26,7 +24,6 @@ std::vector<fs::path> Input::getFiles() {
     for (const auto& entry : fs::directory_iterator(directoryPath_)) {
         auto filename = entry.path().filename();
         if (fs::is_regular_file(entry.status())) {
-            std::cout << entry.path() << "\n";
             files.push_back(entry.path());
         }
     }
@@ -54,7 +51,6 @@ void Input::readLanes(const std::vector<fs::path>& files) {
             laneName = fileName.substr(0, lastdot);
         }
         Lane lane(laneName);
-        std::cout <<  "Lane name: " << laneName << '\n';
         readPlayers(file, lane);
         lanes_.emplace_back(std::make_shared<Lane>(lane));
     }
@@ -64,8 +60,6 @@ void Input::readPlayers(const fs::path& file, Lane& lane) {
     std::ifstream infile(file);
     std::string line;
     while (std::getline(infile, line)) {
-        std::cout << "Line: " << line << '\n';
         lane.addPlayer(line);
-
     }
 }
