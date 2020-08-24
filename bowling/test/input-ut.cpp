@@ -59,6 +59,7 @@ TEST(InputTest, ShouldReadFiles) {
     Input input(inputDirectory);
 
     //THEN
+    ASSERT_EQ(input.isValid(), true);
     EXPECT_EQ(input.getLanesNum(), INPUT_DIRECTORY_FILES_COUNT);
     EXPECT_EQ(input.getLane(0)->getName(), LANE1_NAME);
     EXPECT_EQ(input.getLane(0)->getPlayersNum(), LANE1_PLAYERS_NUM);
