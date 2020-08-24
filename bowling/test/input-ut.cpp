@@ -3,7 +3,7 @@
 #include "input.hpp"
 
 constexpr char NON_EXISTING_PATH[] = "nonexistingPath";
-constexpr char INPUT_DIRECTORY[] = "../../test/inputTestDirectory";
+constexpr char INPUT_DIRECTORY[] = "../test/inputTestDirectory";
 constexpr size_t INPUT_DIRECTORY_FILES_COUNT = 3;
 
 constexpr char LANE1_NAME[] = "lane1";
