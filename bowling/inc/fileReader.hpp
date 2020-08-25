@@ -19,7 +19,8 @@ private:
     bool isValid_;
     std::vector<std::shared_ptr<Lane>> lanes_;
 
+    bool checkDirectory();
     std::vector<std::experimental::filesystem::path> makeFileList();
-    void readLanes(const std::vector<std::experimental::filesystem::path>& files);
+    void readFiles(const std::vector<std::experimental::filesystem::path>& files);
     void readPlayers(const std::experimental::filesystem::path& file, Lane& lane);
 };

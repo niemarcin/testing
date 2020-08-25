@@ -6,16 +6,26 @@
 namespace fs = std::experimental::filesystem;
 
 FileReader::FileReader(const std::string& directory) : directoryPath_(fs::path(directory)), isValid_(false) {
-    if (!fs::exists(directoryPath_)) {
+    
+    if (!checkDirectory()) {
         return;
     }
-    if (!fs::is_directory(directoryPath_)) {
-        return;
-    }
+
     std::vector<fs::path> files = makeFileList();
-    readLanes(files);
+    readFiles(files);
     isValid_ = true;
 };
+
+bool FileReader::checkDirectory()
+{
+    if (!fs::exists(directoryPath_)) {
+        return false;
+    }
+    if (!fs::is_directory(directoryPath_)) {
+        return false;
+    }
+    return true;
+}
 
 std::vector<fs::path> FileReader::makeFileList() {
     std::vector<fs::path> files;
@@ -39,7 +49,7 @@ std::shared_ptr<Lane> FileReader::getLane(size_t index) {
     return nullptr;
 }
 
-void FileReader::readLanes(const std::vector<fs::path>& files) {
+void FileReader::readFiles(const std::vector<fs::path>& files) {
     for (const auto& file : files) {
         Lane lane(file.stem());
         readPlayers(file, lane);
