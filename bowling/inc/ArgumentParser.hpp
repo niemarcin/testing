@@ -5,17 +5,18 @@
 
 class ArgumentParser {
 public:
-    ArgumentParser(int argc, char** argv);
+    ArgumentParser(int size, char** arguments);
 
-    std::string getAppName() const { return appName_; }
+    std::string getAppName() const;
     std::string getInputDirectory() const;
     std::string getOutputFileName() const;
     bool isHelpNeeded() const;
     
 private:
-    int argc_;
-    std::vector<std::string> argv_{};
-    std::string appName_{};
+    size_t size_{};
+    std::vector<std::string> arguments_{};
 
+    void fillArgumentsVector(char** arguments);
+    std::string getExistingArgument(size_t index) const;
     bool argumentExists(const std::string& option) const;
 };

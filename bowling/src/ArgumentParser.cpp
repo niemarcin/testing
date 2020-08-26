@@ -2,33 +2,41 @@
 
 #include <algorithm>
 
-ArgumentParser::ArgumentParser(int argc, char** argv) {
-    argc_ = argc;
-    argv_.reserve(argc_);
-    for (int i = 0; i < argc_ ; ++i) {
-        argv_.push_back(argv[i]);
+ArgumentParser::ArgumentParser(int size, char** arguments) {
+    size_ = size;
+    fillArgumentsVector(arguments);
+}
+
+void ArgumentParser::fillArgumentsVector(char** arguments) {
+    arguments_.reserve(size_);
+    for (int i = 0; i < size_; ++i) {
+        arguments_.push_back(arguments[i]);
     }
-    appName_ = argv_[0];
+}
+
+std::string ArgumentParser::getAppName() const {
+    return getExistingArgument(0); 
 }
 
 std::string ArgumentParser::getInputDirectory() const {
-    if (argc_ == 1) {
-        return "";
-    }
-    return argv_[1]; 
+    return getExistingArgument(1); 
 }
 
 std::string ArgumentParser::getOutputFileName() const {
-    if (argc_ <= 2) {
-        return "";
-    }
-    return argv_[2]; 
+    return getExistingArgument(2); 
 }
 
 bool ArgumentParser::isHelpNeeded() const {
-     return argc_ == 1 || argc_ > 3 || argumentExists("-h") || argumentExists("--help");
+     return size_ == 1 || size_ > 3 || argumentExists("-h") || argumentExists("--help");
+}
+
+std::string ArgumentParser::getExistingArgument(size_t index) const {
+    if (index < size_) {
+        return arguments_[index];
+    }
+    return ""; 
 }
 
 bool ArgumentParser::argumentExists(const std::string& option) const {
-    return std::find(begin(argv_), end(argv_), option) != end(argv_);
+    return std::find(begin(arguments_), end(arguments_), option) != end(arguments_);
 }
