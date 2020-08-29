@@ -2,12 +2,27 @@
 
 #include "ArgumentParser.hpp"
 
-TEST(ArgumentParserTests, shouldBeInitializedWithGivenAppName) {
+struct ArgumentParserTestFixture : public ::testing::Test {
+    char appName[10] = "./bowling";
+    char inputDir[9] = "inputDir";
+    char outputFileName[15] = "outputFileName";
+    char helpArgLong[7] = "--help";
+    char helpArgShort[3] = "-h";
+    char additionalArgument[5] = "argX";
+    
+    char* noArgsAppCall[1] = {appName};
+    int noArgsAppCallCnt = 1;
+
+    char* onlyInputDirAppCall[2] = {appName, inputDir};
+    int onlyInputDirAppCallCnt = 2;
+
+    char* bothDirAndFileAppCall[3] = {appName, inputDir, outputFileName};
+    int bothDirAndFileAppCallCnt = 3;
+};
+
+TEST_F(ArgumentParserTestFixture, shouldBeInitializedWithGivenAppName) {
     // GIVEN
-    char appName[] = "./bowling";
-    char* argumentsArray[] = {appName};
-    int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
-    ArgumentParser ap{argumentsCounter, argumentsArray};
+    ArgumentParser ap{noArgsAppCallCnt, noArgsAppCall};
 
     // WHEN
     auto result = ap.getAppName();
@@ -16,55 +31,9 @@ TEST(ArgumentParserTests, shouldBeInitializedWithGivenAppName) {
     ASSERT_EQ(result, appName);
 }
 
-TEST(ArgumentParserTests, inputDirectoryStringShouldBeEmptyWhenNoArgumentsWereGiven) {
+TEST_F(ArgumentParserTestFixture, inputDirectoryAndOutputFileNameStringsShouldBeEmptyWhenNoArgumentsWereGiven) {
     // GIVEN
-    char appName[] = "./bowling";
-    char* argumentsArray[] = {appName};
-    int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
-    ArgumentParser ap{argumentsCounter, argumentsArray};
-
-    // WHEN
-    auto result = ap.getInputDirectory();
-
-    // THEN
-    ASSERT_EQ(result, "");
-}
-
-TEST(ArgumentParserTests, outputFileNameStringShouldBeEmptyWhenNoArgumentsWereGiven) {
-    // GIVEN
-    char appName[] = "./bowling";
-    char* argumentsArray[] = {appName};
-    int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
-    ArgumentParser ap{argumentsCounter, argumentsArray};
-
-    // WHEN
-    auto result = ap.getOutputFileName();
-
-    // THEN
-    ASSERT_EQ(result, "");
-}
-
-TEST(ArgumentParserTests, outputFileNameStringShouldBeEmptyWhenOnlyInputDirectoryWasGiven) {
-    // GIVEN
-    char appName[] = "./bowling";
-    char arg1[] = "inputDir";
-    char* argumentsArray[] = {appName, arg1};
-    int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
-    ArgumentParser ap{argumentsCounter, argumentsArray};
-
-    // WHEN
-    auto result = ap.getOutputFileName();
-
-    // THEN
-    ASSERT_EQ(result, "");
-}
-
-TEST(ArgumentParserTests, inputDirectoryAndOutputFileNameStringsShouldBeEmptyWhenNoArgumentsWereGiven) {
-    // GIVEN
-    char appName[] = "./bowling";
-    char* argumentsArray[] = {appName};
-    int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
-    ArgumentParser ap{argumentsCounter, argumentsArray};
+    ArgumentParser ap{noArgsAppCallCnt, noArgsAppCall};
 
     // WHEN
     auto inputDirectory = ap.getInputDirectory();
@@ -75,41 +44,53 @@ TEST(ArgumentParserTests, inputDirectoryAndOutputFileNameStringsShouldBeEmptyWhe
     ASSERT_TRUE(result);
 }
 
-TEST(ArgumentParserTests, inputDirectoryShouldBeInitializedWithGivenArgument) {
+TEST_F(ArgumentParserTestFixture, outputFileNameStringShouldBeEmptyWhenOnlyInputDirectoryWasGiven) {
     // GIVEN
-    char appName[] = "./bowling";
-    char arg1[] = "inputDir";
-    char* argumentsArray[] = {appName, arg1};
-    int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
-    ArgumentParser ap{argumentsCounter, argumentsArray};
-
-    // WHEN
-    auto result = ap.getInputDirectory();
-
-    // THEN
-    ASSERT_EQ(result, arg1);
-}
-
-TEST(ArgumentParserTests, outputFileNameShouldBeInitializedWithGivenArgument) {
-    // GIVEN
-    char appName[] = "./bowling";
-    char arg1[] = "inputDir";
-    char arg2[] = "outputFileName";
-    char* argumentsArray[] = {appName, arg1, arg2};
-    int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
-    ArgumentParser ap{argumentsCounter, argumentsArray};
+    ArgumentParser ap{onlyInputDirAppCallCnt, onlyInputDirAppCall};
 
     // WHEN
     auto result = ap.getOutputFileName();
 
     // THEN
-    ASSERT_EQ(result, arg2);
+    ASSERT_EQ(result, "");
 }
 
-TEST(ArgumentParserTests, helpShouldBeCalledWhenNotEnoughArguments) {
+TEST_F(ArgumentParserTestFixture, inputDirectoryShouldBeInitializedWithGivenArgument) {
     // GIVEN
-    char appName[] = "./bowling";
-    char* argumentsArray[] = {appName};
+    ArgumentParser ap{onlyInputDirAppCallCnt, onlyInputDirAppCall};
+
+    // WHEN
+    auto result = ap.getInputDirectory();
+
+    // THEN
+    ASSERT_EQ(result, inputDir);
+}
+
+TEST_F(ArgumentParserTestFixture, inputDirectoryAndOutputFileNameShouldBeInitializedWithGivenArguments) {
+    // GIVEN
+    ArgumentParser ap{bothDirAndFileAppCallCnt, bothDirAndFileAppCall};
+
+    // WHEN
+    auto result = ap.getInputDirectory() == inputDir && ap.getOutputFileName() == outputFileName;
+
+    // THEN
+    ASSERT_TRUE(result);
+}
+
+TEST_F(ArgumentParserTestFixture, helpShouldBeCalledWhenNotEnoughArguments) {
+    // GIVEN
+    ArgumentParser ap{noArgsAppCallCnt, noArgsAppCall};
+
+    // WHEN
+    auto result = ap.isHelpNeeded();
+
+    // THEN
+    ASSERT_EQ(result, true);
+}
+
+TEST_F(ArgumentParserTestFixture, helpShouldBeCalledWhenTooMuchArguments) {
+    // GIVEN
+    char* argumentsArray[] = {appName, inputDir, outputFileName, additionalArgument};   
     int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
     ArgumentParser ap{argumentsCounter, argumentsArray};
 
@@ -120,13 +101,9 @@ TEST(ArgumentParserTests, helpShouldBeCalledWhenNotEnoughArguments) {
     ASSERT_EQ(result, true);
 }
 
-TEST(ArgumentParserTests, helpShouldBeCalledWhenTooMuchArguments) {
+TEST_F(ArgumentParserTestFixture, helpShouldBeCalledWhenShortHelpFlagUsed) {
     // GIVEN
-    char appName[] = "./bowling";
-    char arg1[] = "arg1";
-    char arg2[] = "arg2";
-    char arg3[] = "arg3";
-    char* argumentsArray[] = {appName, arg1, arg2, arg3};   
+    char* argumentsArray[] = {appName, helpArgShort};
     int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
     ArgumentParser ap{argumentsCounter, argumentsArray};
 
@@ -137,11 +114,9 @@ TEST(ArgumentParserTests, helpShouldBeCalledWhenTooMuchArguments) {
     ASSERT_EQ(result, true);
 }
 
-TEST(ArgumentParserTests, helpShouldBeCalledWhenHFlagUsed) {
+TEST_F(ArgumentParserTestFixture, helpShouldBeCalledWhenLongHelpFlagUsed) {
     // GIVEN
-    char appName[] = "./bowling";
-    char arg1[] = "-h";
-    char* argumentsArray[] = {appName, arg1};
+    char* argumentsArray[] = {appName, helpArgLong};
     int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
     ArgumentParser ap{argumentsCounter, argumentsArray};
 
@@ -152,28 +127,9 @@ TEST(ArgumentParserTests, helpShouldBeCalledWhenHFlagUsed) {
     ASSERT_EQ(result, true);
 }
 
-TEST(ArgumentParserTests, helpShouldBeCalledWhenHelpFlagUsed) {
+TEST_F(ArgumentParserTestFixture, helpShouldNotBeCalledWhenSingleArgumentWasGiven) {
     // GIVEN
-    char appName[] = "./bowling";
-    char arg1[] = "--help";
-    char* argumentsArray[] = {appName, arg1};
-    int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
-    ArgumentParser ap{argumentsCounter, argumentsArray};
-
-    // WHEN
-    auto result = ap.isHelpNeeded();
-
-    // THEN
-    ASSERT_EQ(result, true);
-}
-
-TEST(ArgumentParserTests, helpShouldNotBeCalledWhenSingleArgumentWasGiven) {
-    // GIVEN
-    char appName[] = "./bowling";
-    char arg1[] = "inputDir";
-    char* argumentsArray[] = {appName, arg1};
-    int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
-    ArgumentParser ap{argumentsCounter, argumentsArray};
+    ArgumentParser ap{onlyInputDirAppCallCnt, onlyInputDirAppCall};
 
     // WHEN
     auto result = ap.isHelpNeeded();
@@ -182,14 +138,9 @@ TEST(ArgumentParserTests, helpShouldNotBeCalledWhenSingleArgumentWasGiven) {
     ASSERT_EQ(result, false);
 }
 
-TEST(ArgumentParserTests, helpShouldNotBeCalledWhenTwoArgumentsWereGiven) {
+TEST_F(ArgumentParserTestFixture, helpShouldNotBeCalledWhenTwoArgumentsWereGiven) {
     // GIVEN
-    char appName[] = "./bowling";
-    char arg1[] = "inputDir";
-    char arg2[] = "outputFile";
-    char* argumentsArray[] = {appName, arg1, arg2};
-    int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
-    ArgumentParser ap{argumentsCounter, argumentsArray};
+    ArgumentParser ap{bothDirAndFileAppCallCnt, bothDirAndFileAppCall};
 
     // WHEN
     auto result = ap.isHelpNeeded();
