@@ -126,7 +126,7 @@ TEST(ArgumentParserTests, helpShouldBeCalledWhenTooMuchArguments) {
     char arg1[] = "arg1";
     char arg2[] = "arg2";
     char arg3[] = "arg3";
-    char* argumentsArray[] = {appName, arg1, arg2, arg3};   
+    char* argumentsArray[] = {appName, arg1, arg2, arg3};
     int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
     ArgumentParser ap{argumentsCounter, argumentsArray};
 

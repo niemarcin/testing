@@ -11,7 +11,7 @@ public:
     std::string getInputDirectory() const;
     std::string getOutputFileName() const;
     bool isHelpNeeded() const;
-    
+
 private:
     size_t size_{};
     std::vector<std::string> arguments_{};
