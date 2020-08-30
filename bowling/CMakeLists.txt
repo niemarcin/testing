@@ -54,6 +54,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(SOURCES
     ${SOURCE_DIR}/game.cpp
     ${SOURCE_DIR}/fileReader.cpp
+    ${SOURCE_DIR}/ArgumentParser.cpp
 )
 
 set(TESTS
@@ -68,9 +69,16 @@ add_executable(${PROJECT_NAME}-ut ${TESTS})
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib gtest_main stdc++fs)
+add_executable(${PROJECT_NAME}-ap-ut ${TEST_DIR}/ArgumentParser-ut.cpp)
+
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
+target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib gtest_main)
+target_link_libraries(${PROJECT_NAME}-ap-ut ${PROJECT_NAME}-lib gtest_main)
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror -Wconversion -pedantic -O3)
 target_compile_options(${PROJECT_NAME}-ut PRIVATE -Wall -Wextra -Werror -Wconversion -pedantic -O3)
+target_compile_options(${PROJECT_NAME}-ap-ut PRIVATE -Wall -Wextra -Werror -Wconversion -pedantic -O3)
 
 enable_testing()
 add_test(NAME BowlingTest COMMAND ${PROJECT_NAME}-ut)
+add_test(NAME ArgumentParserTest COMMAND ${PROJECT_NAME}-ap-ut)
