@@ -9,7 +9,7 @@ struct ArgumentParserTestFixture : public ::testing::Test {
     char helpArgLong[7] = "--help";
     char helpArgShort[3] = "-h";
     char additionalArgument[5] = "argX";
-    
+
     char* noArgsAppCall[1] = {appName};
     int noArgsAppCallCnt = 1;
 
@@ -90,7 +90,7 @@ TEST_F(ArgumentParserTestFixture, helpShouldBeCalledWhenNotEnoughArguments) {
 
 TEST_F(ArgumentParserTestFixture, helpShouldBeCalledWhenTooMuchArguments) {
     // GIVEN
-    char* argumentsArray[] = {appName, inputDir, outputFileName, additionalArgument};   
+    char* argumentsArray[] = {appName, inputDir, outputFileName, additionalArgument};
     int argumentsCounter = sizeof(argumentsArray) / sizeof(char*);
     ArgumentParser ap{argumentsCounter, argumentsArray};
 

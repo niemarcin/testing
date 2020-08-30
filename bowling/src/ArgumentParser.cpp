@@ -15,26 +15,26 @@ void ArgumentParser::fillArgumentsVector(char** arguments) {
 }
 
 std::string ArgumentParser::getAppName() const {
-    return getExistingArgument(0); 
+    return getExistingArgument(0);
 }
 
 std::string ArgumentParser::getInputDirectory() const {
-    return getExistingArgument(1); 
+    return getExistingArgument(1);
 }
 
 std::string ArgumentParser::getOutputFileName() const {
-    return getExistingArgument(2); 
+    return getExistingArgument(2);
 }
 
 bool ArgumentParser::isHelpNeeded() const {
-     return size_ == 1 || size_ > 3 || argumentExists("-h") || argumentExists("--help");
+    return size_ == 1 || size_ > 3 || argumentExists("-h") || argumentExists("--help");
 }
 
 std::string ArgumentParser::getExistingArgument(size_t index) const {
     if (index < size_) {
         return arguments_[index];
     }
-    return ""; 
+    return "";
 }
 
 bool ArgumentParser::argumentExists(const std::string& option) const {
