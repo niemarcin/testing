@@ -2,10 +2,10 @@
 
 #include <iostream>
 
-constexpr int MAX_PINS{ 10 };
-constexpr int MAX_FRAMES{ 10 };
-constexpr int MAX_ROLLS{ 21};
-constexpr int MAX_FRAME_SCORE{ MAX_PINS };
+constexpr int MAX_PINS{10};
+constexpr int MAX_FRAMES{10};
+constexpr int MAX_ROLLS{21};
+constexpr int MAX_FRAME_SCORE{MAX_PINS};
 
 class Game {
 public:
