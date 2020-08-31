@@ -8,8 +8,7 @@ FilesReader::FilesReader(const std::string& directory) : directoryPath_(fs::path
         return;
     }
 
-    std::vector<fs::path> files = makeFileList();
-    readFiles(files);
+    readFiles(makeFileList());
     isValid_ = true;
 };
 
