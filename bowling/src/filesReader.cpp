@@ -1,25 +1,22 @@
-#include <algorithm>
-#include <fstream>
-
 #include "filesReader.hpp"
 
-FilesReader::FilesReader(const std::string& directory) : directoryPath_(fs::path(directory)), isValid_(false) {
-    if (!checkDirectory()) {
-        return;
-    }
+#include <algorithm>
+#include <fstream>
+#include <stdexcept>
+
+FilesReader::FilesReader(const std::string& directory) : directoryPath_(fs::path(directory)) {
+    checkDirectory();
 
     readFiles(makeFileList());
-    isValid_ = true;
 };
 
-bool FilesReader::checkDirectory() const {
+void FilesReader::checkDirectory() const {
     if (!fs::exists(directoryPath_)) {
-        return false;
+        throw std::invalid_argument("Directory does not exist");    
     }
     if (!fs::is_directory(directoryPath_)) {
-        return false;
+        throw std::invalid_argument("Not a directory");   
     }
-    return true;
 }
 
 std::vector<fs::path> FilesReader::makeFileList() {
