@@ -6,21 +6,23 @@
 
 #include "lane.hpp"
 
-class FileReader {
+namespace fs = std::experimental::filesystem;
+
+class FilesReader {
 public:
-    FileReader(const std::string& directory);
+    FilesReader(const std::string& directory);
 
     bool isValid() const { return isValid_; }
     size_t getLanesNum() const { return lanes_.size(); }
-    std::shared_ptr<Lane> getLane(size_t index);
+    std::shared_ptr<Lane> getLane(size_t index) const;
 
 private:
-    std::experimental::filesystem::path directoryPath_;
+    fs::path directoryPath_;
     bool isValid_;
     std::vector<std::shared_ptr<Lane>> lanes_;
 
-    bool checkDirectory();
+    bool checkDirectory() const;
     std::vector<std::experimental::filesystem::path> makeFileList();
-    void readFiles(const std::vector<std::experimental::filesystem::path>& files);
+    void readFiles(const std::vector<fs::path>& files);
     void readPlayers(const std::experimental::filesystem::path& file, Lane& lane);
 };

@@ -1,12 +1,9 @@
 #include <algorithm>
 #include <fstream>
 
-#include "fileReader.hpp"
+#include "filesReader.hpp"
 
-namespace fs = std::experimental::filesystem;
-
-FileReader::FileReader(const std::string& directory) : directoryPath_(fs::path(directory)), isValid_(false) {
-    
+FilesReader::FilesReader(const std::string& directory) : directoryPath_(fs::path(directory)), isValid_(false) {
     if (!checkDirectory()) {
         return;
     }
@@ -16,8 +13,7 @@ FileReader::FileReader(const std::string& directory) : directoryPath_(fs::path(d
     isValid_ = true;
 };
 
-bool FileReader::checkDirectory()
-{
+bool FilesReader::checkDirectory() const {
     if (!fs::exists(directoryPath_)) {
         return false;
     }
@@ -27,7 +23,7 @@ bool FileReader::checkDirectory()
     return true;
 }
 
-std::vector<fs::path> FileReader::makeFileList() {
+std::vector<fs::path> FilesReader::makeFileList() {
     std::vector<fs::path> files;
 
     for (const auto& entry : fs::directory_iterator(directoryPath_)) {
@@ -42,14 +38,14 @@ std::vector<fs::path> FileReader::makeFileList() {
     return files;
 }
 
-std::shared_ptr<Lane> FileReader::getLane(size_t index) {
+std::shared_ptr<Lane> FilesReader::getLane(size_t index) const {
     if (index < lanes_.size()) {
         return lanes_[index];
     }
     return nullptr;
 }
 
-void FileReader::readFiles(const std::vector<fs::path>& files) {
+void FilesReader::readFiles(const std::vector<fs::path>& files) {
     for (const auto& file : files) {
         Lane lane(file.stem());
         readPlayers(file, lane);
@@ -57,7 +53,7 @@ void FileReader::readFiles(const std::vector<fs::path>& files) {
     }
 }
 
-void FileReader::readPlayers(const fs::path& file, Lane& lane) {
+void FilesReader::readPlayers(const fs::path& file, Lane& lane) {
     std::ifstream infile(file);
     std::string line;
     while (std::getline(infile, line)) {
