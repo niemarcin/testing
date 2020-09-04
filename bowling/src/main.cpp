@@ -24,8 +24,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-void showHelp(std::string appName)
-{
+void showHelp(std::string appName) {
     std::cout << "Bowling game application reads text files from given directory, "
               << "calculates the game results and optionally saves the results to text file.\n\n"
               << "Application usage:\t" << appName << " <inputDirectory> [outputTextFile] [-h, --help]\n\n"
