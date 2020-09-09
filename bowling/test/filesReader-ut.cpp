@@ -11,10 +11,10 @@ TEST_P(FilesReaderTestFixture, ShouldValidateInputDirectory) {
     auto [path, isValid] = GetParam();
 
     if (isValid) {
-        //WHEN, THEN
-        ASSERT_NO_THROW(FilesReader filesReader(path));   
+        // WHEN, THEN
+        ASSERT_NO_THROW(FilesReader filesReader(path));
     } else {
-        //WHEN, THEN
+        // WHEN, THEN
         ASSERT_THROW(FilesReader filesReader(path), std::invalid_argument);
     }
 }
