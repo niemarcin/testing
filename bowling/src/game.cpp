@@ -9,12 +9,10 @@ int Game::score() {
     int firstFrameThrow{};
     for (int frame = 0; frame < MAX_FRAMES; ++frame) {
         if (isStrike(firstFrameThrow)) {
-            score_ += MAX_FRAME_SCORE +
-                      nextTwoBallsForStrike(firstFrameThrow);
+            score_ += MAX_FRAME_SCORE + nextTwoBallsForStrike(firstFrameThrow);
             firstFrameThrow++;
         } else if (isSpare(firstFrameThrow)) {
-            score_ += MAX_FRAME_SCORE +
-                      nextBallForSpare(firstFrameThrow);
+            score_ += MAX_FRAME_SCORE + nextBallForSpare(firstFrameThrow);
             firstFrameThrow += 2;
         } else {
             score_ += twoBallsInFrame(firstFrameThrow);
@@ -29,19 +27,15 @@ void Game::reset() {
 }
 
 bool Game::isSpare(int firstFrameThrow) {
-    return (rolls[firstFrameThrow] +
-            rolls[++firstFrameThrow] ==
-            MAX_PINS);
+    return (rolls[firstFrameThrow] + rolls[++firstFrameThrow] == MAX_PINS);
 }
 
 bool Game::isStrike(int firstFrameThrow) {
-    return (rolls[firstFrameThrow] ==
-            MAX_PINS);
+    return (rolls[firstFrameThrow] == MAX_PINS);
 }
 
 int Game::nextTwoBallsForStrike(int firstFrameThrow) {
-    return rolls[++firstFrameThrow] +
-           rolls[++firstFrameThrow];
+    return rolls[++firstFrameThrow] + rolls[++firstFrameThrow];
 }
 
 int Game::nextBallForSpare(int firstFrameThrow) {
@@ -49,6 +43,5 @@ int Game::nextBallForSpare(int firstFrameThrow) {
 }
 
 int Game::twoBallsInFrame(int firstFrameThrow) {
-    return rolls[firstFrameThrow] +
-           rolls[++firstFrameThrow];
+    return rolls[firstFrameThrow] + rolls[++firstFrameThrow];
 }

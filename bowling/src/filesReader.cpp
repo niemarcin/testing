@@ -12,10 +12,10 @@ FilesReader::FilesReader(const std::string& directory) : directoryPath_(fs::path
 
 void FilesReader::checkDirectory() const {
     if (!fs::exists(directoryPath_)) {
-        throw std::invalid_argument("Directory does not exist");    
+        throw std::invalid_argument("Directory does not exist");
     }
     if (!fs::is_directory(directoryPath_)) {
-        throw std::invalid_argument("Not a directory");   
+        throw std::invalid_argument("Not a directory");
     }
 }
 
