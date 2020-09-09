@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "ArgumentParser.hpp"
+#include "argumentParser.hpp"
 
 struct ArgumentParserTestFixture : public ::testing::Test {
     char appName[10] = "./bowling";
