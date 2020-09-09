@@ -20,7 +20,7 @@ private:
     std::vector<std::shared_ptr<Lane>> lanes_;
 
     void checkDirectory() const;
-    std::vector<std::experimental::filesystem::path> makeFileList();
+    std::vector<fs::path> makeFileList();
     void readFiles(const std::vector<fs::path>& files);
-    void readPlayers(const std::experimental::filesystem::path& file, Lane& lane);
+    void readPlayers(const fs::path& file, Lane& lane);
 };
