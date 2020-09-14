@@ -1,4 +1,4 @@
-#include "ArgumentParser.hpp"
+#include "argumentParser.hpp"
 
 #include <algorithm>
 

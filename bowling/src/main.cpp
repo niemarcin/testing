@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "ArgumentParser.hpp"
+#include "argumentParser.hpp"
 #include "game.hpp"
 
 void showHelp(std::string appName);
