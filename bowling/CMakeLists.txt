@@ -52,11 +52,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 ##Insert project source files here.##
 set(SOURCES
-    # ${SOURCE_DIR}/game.cpp
-    # ${SOURCE_DIR}/filesReader.cpp
-    # ${SOURCE_DIR}/argumentParser.cpp
-    # ${SOURCE_DIR}/frameParser.cpp
-    # ${SOURCE_DIR}/tokenizer.cpp
+    ${SOURCE_DIR}/game.cpp
+    ${SOURCE_DIR}/filesReader.cpp
+    ${SOURCE_DIR}/argumentParser.cpp
+    ${SOURCE_DIR}/frameParser.cpp
+    ${SOURCE_DIR}/tokenizer.cpp
     ${SOURCE_DIR}/printer.cpp
     ${SOURCE_DIR}/consoleStream.cpp
     ${SOURCE_DIR}/fileStream.cpp
@@ -66,10 +66,10 @@ set(SOURCES
 )
 
 set(TESTS
-    # ${TEST_DIR}/bowling-ut.cpp
-    # ${TEST_DIR}/filesReader-ut.cpp
-    # ${TEST_DIR}/argumentParser-ut.cpp
-    # ${TEST_DIR}/parser-ut.cpp
+    ${TEST_DIR}/bowling-ut.cpp
+    ${TEST_DIR}/filesReader-ut.cpp
+    ${TEST_DIR}/argumentParser-ut.cpp
+    ${TEST_DIR}/parser-ut.cpp
     ${TEST_DIR}/printer-ut.cpp
 )
 
