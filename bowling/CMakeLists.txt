@@ -59,6 +59,8 @@ set(SOURCES
     # ${SOURCE_DIR}/tokenizer.cpp
     ${SOURCE_DIR}/Printer.cpp
     ${SOURCE_DIR}/consoleStream.cpp
+    ${SOURCE_DIR}/fileStream.cpp
+
 
 
 )

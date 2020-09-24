@@ -2,7 +2,6 @@
 
 #include "printableData.hpp"
 #include "printerStream.hpp"
-#include "consoleStream.hpp"
 
 #include <ostream>
 #include <sstream>
@@ -10,33 +9,6 @@
 #include <string>
 #include <vector>
 
-#include <stdexcept>
-
-
-struct InvalidFileName : public std::invalid_argument{
-    InvalidFileName() : std::invalid_argument("invalid name"){};
-};
-
-
-
-
-
-
-
-class FileStream : public PrinterStream{
-public:
-    FileStream(std::string filePath);
-    ~FileStream(){
-        file_->close();
-        delete file_;
-    }
-
-    void print(std::string stream) override;
-    void print(size_t value) override;
-
-private:
-    std::ofstream * file_;
-};
 
 class Printer{
 public:

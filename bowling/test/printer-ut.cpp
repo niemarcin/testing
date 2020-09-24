@@ -4,6 +4,8 @@
 #include <filesystem>
 
 #include "Printer.h"
+#include "consoleStream.hpp"
+#include "fileStream.hpp"
 
 struct PrinterTest : public ::testing::Test
 {

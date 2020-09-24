@@ -1,29 +1,6 @@
 #include "Printer.h"
 
 
-
-
-
-
-
-    FileStream::FileStream(std::string filePath){
-        if(filePath.empty())
-            throw InvalidFileName();
-        
-        file_ = new std::ofstream;
-        file_->open(filePath);
-    }
-
-    void FileStream::print(std::string stream){
-        *file_ << stream;
-    };
-
-    void FileStream::print(size_t value){
-        *file_ << value;
-    }
-
-
-
     void Printer::print(std::vector<LaneStruct> lanes) {
         for(auto & lane : lanes){
             printHeader(lane);

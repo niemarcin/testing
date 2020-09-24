@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 class PrinterStream{
 public:
     virtual void print(std::string stream) = 0;
