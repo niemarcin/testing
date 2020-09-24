@@ -32,7 +32,7 @@ TEST_F(PrinterTest, GivenEmptyStruct_ShouldPrintNoData) {
 }
 
 TEST_F(PrinterTest, laneInProgress_ShouldPrintValidHeader) {
-    lanes.emplace_back("Lane 1", LaneStruct::Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 1", Status::IN_PROGRESS);
 
     printer->print(lanes);
 
@@ -41,7 +41,7 @@ TEST_F(PrinterTest, laneInProgress_ShouldPrintValidHeader) {
 }
 
 TEST_F(PrinterTest, laneNoGame_ShouldPrintValidHeader) {
-    lanes.emplace_back("Lane 1", LaneStruct::Status::NO_GAME);
+    lanes.emplace_back("Lane 1", Status::NO_GAME);
 
     printer->print(lanes);
 
@@ -50,7 +50,7 @@ TEST_F(PrinterTest, laneNoGame_ShouldPrintValidHeader) {
 }
 
 TEST_F(PrinterTest, laneFinished_ShouldPrintValidHeader) {
-    lanes.emplace_back("Lane 1", LaneStruct::Status::FINISHED);
+    lanes.emplace_back("Lane 1", Status::FINISHED);
 
     printer->print(lanes);
 
@@ -59,7 +59,7 @@ TEST_F(PrinterTest, laneFinished_ShouldPrintValidHeader) {
 }
 
 TEST_F(PrinterTest, givenOnePLayer_ShouldPrintValidData) {
-    lanes.emplace_back("Lane 1", LaneStruct::Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 1", Status::IN_PROGRESS);
     lanes[0].players.emplace_back("Name1", 30);
 
     printer->print(lanes);
@@ -70,7 +70,7 @@ TEST_F(PrinterTest, givenOnePLayer_ShouldPrintValidData) {
 }
 
 TEST_F(PrinterTest, givenPlayerWithoutName_ShouldPrintOnlyScore) {
-    lanes.emplace_back("Lane 1", LaneStruct::Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 1", Status::IN_PROGRESS);
     lanes[0].players.emplace_back("", 30);
 
     printer->print(lanes);
@@ -81,9 +81,9 @@ TEST_F(PrinterTest, givenPlayerWithoutName_ShouldPrintOnlyScore) {
 }
 
 TEST_F(PrinterTest, givenMultipleLines_ShouldPrintValidHeaders) {
-    lanes.emplace_back("Lane 1", LaneStruct::Status::IN_PROGRESS);
-    lanes.emplace_back("Lane 2", LaneStruct::Status::IN_PROGRESS);
-    lanes.emplace_back("Lane 3", LaneStruct::Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 1", Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 2", Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 3", Status::IN_PROGRESS);
 
     printer->print(lanes);
 
@@ -94,9 +94,9 @@ TEST_F(PrinterTest, givenMultipleLines_ShouldPrintValidHeaders) {
 }
 
 TEST_F(PrinterTest, givenMultipleLinesWithMultiplePlayers_ShouldPrintValidHeaders) {
-    lanes.emplace_back("Lane 1", LaneStruct::Status::IN_PROGRESS);
-    lanes.emplace_back("Lane 2", LaneStruct::Status::IN_PROGRESS);
-    lanes.emplace_back("Lane 3", LaneStruct::Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 1", Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 2", Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 3", Status::IN_PROGRESS);
 
     lanes[0].players.emplace_back("Name1", 10);
     lanes[1].players.emplace_back("Name2", 20);
@@ -126,9 +126,9 @@ TEST_F(PrinterIntoFileTest, givenData_ShouldPrintIntoFile) {
     std::string fileName = "testFile.txt";
     printer = new Printer(new FileStream(fileName));
 
-    lanes.emplace_back("Lane 1", LaneStruct::Status::IN_PROGRESS);
-    lanes.emplace_back("Lane 2", LaneStruct::Status::IN_PROGRESS);
-    lanes.emplace_back("Lane 3", LaneStruct::Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 1", Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 2", Status::IN_PROGRESS);
+    lanes.emplace_back("Lane 3", Status::IN_PROGRESS);
 
     lanes[0].players.emplace_back("Name1", 10);
     lanes[1].players.emplace_back("Name2", 20);

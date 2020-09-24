@@ -13,6 +13,8 @@ struct InvalidFileName : public std::invalid_argument{
     InvalidFileName() : std::invalid_argument("invalid name"){};
 };
 
+enum class Status { NO_GAME, IN_PROGRESS, FINISHED };
+
 struct Player {
     Player(std::string name_, size_t score_) : name(name_), score(score_){};
 
@@ -21,7 +23,6 @@ struct Player {
 };
 
 struct LaneStruct {
-    enum class Status { NO_GAME, IN_PROGRESS, FINISHED };
     LaneStruct(){};
     LaneStruct(std::string name_, Status status_) : name(name_), status(status_){};
 
@@ -71,7 +72,7 @@ private:
     void printHeader(LaneStruct & lane);
     void print(std::string text);
     void print(size_t value);
-    std::string parseStatus(const LaneStruct::Status status);
+    std::string parseStatus(const Status status);
     void printPlayers(LaneStruct & lane);
     void printPlayer(Player & player);
 

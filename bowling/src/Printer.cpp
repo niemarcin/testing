@@ -53,15 +53,15 @@
         stream_->print(value);
     }
 
-    std::string Printer::parseStatus(const LaneStruct::Status status) {
+    std::string Printer::parseStatus(const Status status) {
         switch(status){
-        case LaneStruct::Status::NO_GAME:
+        case Status::NO_GAME:
             return "no game";
 
-        case LaneStruct::Status::IN_PROGRESS:
+        case Status::IN_PROGRESS:
             return "game in progress";
         
-        case LaneStruct::Status::FINISHED:
+        case Status::FINISHED:
             return "game finished";
 
         default:
