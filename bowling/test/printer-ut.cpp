@@ -3,7 +3,7 @@
 #include <ostream>
 #include <filesystem>
 
-#include "Printer.h"
+#include "printer.h"
 #include "consoleStream.hpp"
 #include "fileStream.hpp"
 
