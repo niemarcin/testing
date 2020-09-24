@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <functional>
-#include <ostream>
 #include <filesystem>
 
 #include "printer.h"
