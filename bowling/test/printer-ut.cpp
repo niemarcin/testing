@@ -136,12 +136,12 @@ TEST_F(PrinterIntoFileTest, givenData_ShouldPrintIntoFile) {
 
     printer->print(lanes);
 
-    auto output = "### Lane 1: game in progress ###\n"
-                  "Name1 10\n"
-                  "### Lane 2: game in progress ###\n"
-                  "Name2 20\n"
-                  "### Lane 3: game in progress ###\n"
-                  "Name3 30\n";
+    // auto output = "### Lane 1: game in progress ###\n"
+    //               "Name1 10\n"
+    //               "### Lane 2: game in progress ###\n"
+    //               "Name2 20\n"
+    //               "### Lane 3: game in progress ###\n"
+    //               "Name3 30\n";
 
     ASSERT_TRUE(std::filesystem::exists(fileName));
 }
