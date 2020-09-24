@@ -1,6 +1,8 @@
 #pragma once
 
 #include "printableData.hpp"
+#include "printerStream.hpp"
+#include "consoleStream.hpp"
 
 #include <ostream>
 #include <sstream>
@@ -17,21 +19,8 @@ struct InvalidFileName : public std::invalid_argument{
 
 
 
-class PrinterStream{
-public:
-    virtual void print(std::string stream) = 0;
-    virtual void print(size_t value) = 0;
-};
 
-class ConsoleStream : public PrinterStream{
-public:
-    void print(std::string stream) override;
-    void print(size_t value) override;
-    std::string str() const ;
 
-private:
-    std::ostringstream stream_;
-};
 
 
 class FileStream : public PrinterStream{
