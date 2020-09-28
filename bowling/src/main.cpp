@@ -8,7 +8,7 @@
 void showHelp(std::string appName);
 
 int main(int argc, char* argv[]) {
-    ArgumentParser ap{argc, argv};
+    ArgumentParser ap{static_cast<size_t>(argc), argv};
 
     if (ap.isHelpNeeded()) {
         showHelp(ap.getAppName());
