@@ -13,4 +13,5 @@ private:
     static const char SpareSign;
     static const char MissSign;
     static void parseToken(const char token, size_t& lastRollValue);
+    bool isSequenceComplete(const std::string& line);
 };
