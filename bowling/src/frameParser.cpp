@@ -44,7 +44,7 @@ bool FrameParser::isSequenceComplete(const std::string& line) {
     const std::string endOfSequenceDelimiter = "||";
 
     size_t endOfSequenceDelimiterPosition = line.find(endOfSequenceDelimiter);
-    
+
     if (endOfSequenceDelimiterPosition == std::string::npos) {
         return false;
     } else {
@@ -53,12 +53,10 @@ bool FrameParser::isSequenceComplete(const std::string& line) {
         if (lastRegularToken == FrameParser::StrikeSign) {
             numberOfTokensToLookFor = 2;
             return areProperTokensAtTheEnd(line, endOfSequenceDelimiterPosition, numberOfTokensToLookFor);
-        }
-        else if (lastRegularToken == FrameParser::SpareSign) {
+        } else if (lastRegularToken == FrameParser::SpareSign) {
             numberOfTokensToLookFor = 1;
             return areProperTokensAtTheEnd(line, endOfSequenceDelimiterPosition, numberOfTokensToLookFor);
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -67,8 +65,9 @@ bool FrameParser::isSequenceComplete(const std::string& line) {
 bool FrameParser::areProperTokensAtTheEnd(const std::string& line, size_t position, size_t numberOfTokensToLookFor) {
     std::string tokensAfterEndOfSequenceDelimiter = line.substr(position + 2, numberOfTokensToLookFor);
 
-    return tokensAfterEndOfSequenceDelimiter.length() == numberOfTokensToLookFor 
-           && std::all_of(tokensAfterEndOfSequenceDelimiter.cbegin(), tokensAfterEndOfSequenceDelimiter.cend(), 
-                    [](const auto& el) { return std::isdigit(el) || el == FrameParser::StrikeSign 
-                                                    || el == FrameParser::MissSign; });
+    return tokensAfterEndOfSequenceDelimiter.length() == numberOfTokensToLookFor &&
+           std::all_of(tokensAfterEndOfSequenceDelimiter.cbegin(), tokensAfterEndOfSequenceDelimiter.cend(),
+                       [](const auto& el) {
+                           return std::isdigit(el) || el == FrameParser::StrikeSign || el == FrameParser::MissSign;
+                       });
 }
