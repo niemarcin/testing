@@ -41,22 +41,34 @@ parsedFrame FrameParser::parse(const std::string& line) {
 }
 
 bool FrameParser::isSequenceComplete(const std::string& line) {
-    const std::string EndOfSequenceDelimiter = "||";
+    const std::string endOfSequenceDelimiter = "||";
 
-    size_t position = line.find(EndOfSequenceDelimiter);
+    size_t endOfSequenceDelimiterPosition = line.find(endOfSequenceDelimiter);
     
-    if (position == std::string::npos) { // jeżeli nie znalazł || to znaczy że dana linia/sekwencja nie jest kompletna
+    if (endOfSequenceDelimiterPosition == std::string::npos) {
         return false;
     } else {
-        auto lastToken = line.at(position - 1);
-        if (lastToken == FrameParser::StrikeSign) {// jeżeli znalazł || i znak który poprzedza || to X czyli w ostatnim rzucie był strike
-            return line.substr(position + 2).length() == 1; //to sprawdź czy za || jest jeden dodatkowy znak, jeśli tak to sekwencja kompletna
+        auto lastRegularToken = *(std::prev((line.cbegin() + endOfSequenceDelimiterPosition)));
+        size_t numberOfTokensToLookFor;
+        if (lastRegularToken == FrameParser::StrikeSign) {
+            numberOfTokensToLookFor = 2;
+            return areProperTokensAtTheEnd(line, endOfSequenceDelimiterPosition, numberOfTokensToLookFor);
         }
-        else if (lastToken == FrameParser::SpareSign) {// jeżeli znalazł || i znak który poprzedza || to / czyli w ostatnim rzucie był spare
-            return line.substr(position + 2).length() == 2;//to sprawdź czy za || są dwa dodatkowe znaki, jeśli tak to sekwencja kompletna
+        else if (lastRegularToken == FrameParser::SpareSign) {
+            numberOfTokensToLookFor = 1;
+            return areProperTokensAtTheEnd(line, endOfSequenceDelimiterPosition, numberOfTokensToLookFor);
         }
         else {
-            return true; // jeśli znalazł || a przed || nie było X ani / to sekwencja zakończona
+            return true;
         }
     }
+}
+
+bool FrameParser::areProperTokensAtTheEnd(const std::string& line, size_t position, size_t numberOfTokensToLookFor) {
+    std::string tokensAfterEndOfSequenceDelimiter = line.substr(position + 2, numberOfTokensToLookFor);
+
+    return tokensAfterEndOfSequenceDelimiter.length() == numberOfTokensToLookFor 
+           && std::all_of(tokensAfterEndOfSequenceDelimiter.cbegin(), tokensAfterEndOfSequenceDelimiter.cend(), 
+                    [](const auto& el) { return std::isdigit(el) || el == FrameParser::StrikeSign 
+                                                    || el == FrameParser::MissSign; });
 }
