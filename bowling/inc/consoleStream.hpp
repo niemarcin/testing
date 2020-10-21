@@ -9,7 +9,7 @@ class ConsoleStream : public PrinterStream{
 public:
     void print(std::string stream) override;
     void print(size_t value) override;
-    std::string str() const ;
+    std::string str() const;
 
 private:
     std::ostringstream stream_;

@@ -6,6 +6,7 @@
 #include "argumentParser.hpp"
 #include "consoleStream.hpp"
 #include "filesReader.hpp"
+#include "fileStream.hpp"
 #include "frameParser.hpp"
 #include "game.hpp"
 #include "printableData.hpp"
@@ -28,46 +29,44 @@ int main(int argc, char* argv[]) {
     std::cout << "output file: " << outputFileName << "\n";
 
     ConsoleStream consoleStr;
-    Printer prnt(&consoleStr);
+    FileStream fileStr(outputFileName);
+    PrinterStream* prntStr;
+    if (outputFileName.empty()) {
+        prntStr = &consoleStr;
+    } else {
+        prntStr = &fileStr;
+    }
+    Printer prnt(prntStr);
     std::vector<LaneStruct> lanes;
 
     FilesReader reader(inputDirectory);
-    std::cout << "num of lanes: " << reader.getLanesNum() << '\n';
     Game game;
     for (size_t i = 0; i < reader.getLanesNum(); i++) {
         auto lane = reader.getLane(i);
-        std::cout << "name: " << lane->getName() << '\n';
         LaneStruct printableLane(lane->getName(), Status::NO_GAME);
-        std::cout << "\tplayers num: " << lane->getPlayersNum() << '\n';
         bool allSequencesComplete = true;
         for (size_t j = 0; j < lane->getPlayersNum(); j++) {
-            std::cout << "\t\tplayer: " << lane->getPlayer(j) << '\n';
             allSequencesComplete &= FrameParser::isSequenceComplete(lane->getPlayer(j));
             auto parsed = FrameParser::parse(lane->getPlayer(j));
-            std::cout << "\t\tparsed: " << parsed.first << "  :  ";  
-                            //<< std::accumulate(parsed.second.begin(), parsed.second.end()-1, 0) <<"\n\t";
             for (const auto& el : parsed.second) {
-                std::cout << el << ';';
                 game.roll(el);
             }
-            std::cout << "\n\t\tscore: " << game.score();
             printableLane.players.emplace_back(parsed.first, game.score());
             game.reset();
-            std::cout << "\n\n";
         }
-        if (allSequencesComplete && lane->getPlayersNum()) {
-            printableLane.status = Status::FINISHED;
-        } else if (lane->getPlayersNum() == 0) {
+        if (lane->getPlayersNum() == 0) {
             printableLane.status = Status::NO_GAME;
+        }
+        else if (allSequencesComplete) {
+            printableLane.status = Status::FINISHED;
         } else {
             printableLane.status = Status::IN_PROGRESS;
         }
-        std::cout << "\tstatus: " << int(printableLane.status)<<"\n";
         lanes.push_back(printableLane);
     }
-    std::cout << "lanes size: " << lanes.size() << "\n";
     prnt.print(lanes);
-    std::cout << consoleStr.str();
+    if (outputFileName.empty())
+        std::cout << consoleStr.str();
 
     return 0;
 }
