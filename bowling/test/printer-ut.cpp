@@ -2,7 +2,7 @@
 #include <functional>
 #include <filesystem>
 
-#include "printer.h"
+#include "printer.hpp"
 #include "consoleStream.hpp"
 #include "fileStream.hpp"
 
