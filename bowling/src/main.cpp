@@ -25,16 +25,14 @@ int main(int argc, char* argv[]) {
     auto inputDirectory = ap.getInputDirectory();
     auto outputFileName = ap.getOutputFileName();
 
-    std::cout << "input dir: " << inputDirectory << "\n";
-    std::cout << "output file: " << outputFileName << "\n";
-
     ConsoleStream consoleStr;
-    FileStream fileStr(outputFileName);
+    FileStream* fileStr{nullptr};
     PrinterStream* prntStr;
     if (outputFileName.empty()) {
         prntStr = &consoleStr;
     } else {
-        prntStr = &fileStr;
+        fileStr = new FileStream(outputFileName);
+        prntStr = fileStr;
     }
     Printer prnt(prntStr);
     std::vector<LaneStruct> lanes;
@@ -51,22 +49,23 @@ int main(int argc, char* argv[]) {
             for (const auto& el : parsed.second) {
                 game.roll(el);
             }
-            printableLane.players.emplace_back(parsed.first, game.score());
+            printableLane.players_.emplace_back(parsed.first, game.score());
             game.reset();
         }
         if (lane->getPlayersNum() == 0) {
-            printableLane.status = Status::NO_GAME;
-        }
-        else if (allSequencesComplete) {
-            printableLane.status = Status::FINISHED;
+            printableLane.status_ = Status::NO_GAME;
+        } else if (allSequencesComplete) {
+            printableLane.status_ = Status::FINISHED;
         } else {
-            printableLane.status = Status::IN_PROGRESS;
+            printableLane.status_ = Status::IN_PROGRESS;
         }
         lanes.push_back(printableLane);
     }
     prnt.print(lanes);
-    if (outputFileName.empty())
+    if (outputFileName.empty()) {
         std::cout << consoleStr.str();
+    }
+    delete fileStr;
 
     return 0;
 }

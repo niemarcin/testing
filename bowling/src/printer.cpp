@@ -1,32 +1,35 @@
 #include "printer.hpp"
+#include <sstream>
 
-void Printer::print(std::vector<LaneStruct> lanes) {
-    for(auto & lane : lanes){
+void Printer::print(const std::vector<LaneStruct>& lanes) {
+    for (auto& lane : lanes) {
         printHeader(lane);
         printPlayers(lane);
     }
 }
 
-void Printer::printHeader(LaneStruct & lane){
-    printText("### " + lane.name + ": " + parseStatus(lane.status) + " ###\n");
+void Printer::printHeader(const LaneStruct& lane) const {
+    std::stringstream s;
+    s << "### " << lane.name_ << ": " << parseStatus(lane.status_) << " ###\n";
+    printData(s.str());
 }
 
-void Printer::printText(std::string text){
+void Printer::printData(std::string text) const {
     stream_->print(text);
 }
 
-void Printer::printText(size_t value){
+void Printer::printData(size_t value) const {
     stream_->print(value);
 }
 
-std::string Printer::parseStatus(const Status status) {
-    switch(status){
+std::string Printer::parseStatus(const Status status) const {
+    switch (status) {
     case Status::NO_GAME:
         return "no game";
 
     case Status::IN_PROGRESS:
         return "game in progress";
-    
+
     case Status::FINISHED:
         return "game finished";
 
@@ -35,18 +38,16 @@ std::string Printer::parseStatus(const Status status) {
     }
 }
 
-void Printer::printPlayers(LaneStruct & lane){
-    for(auto & player : lane.players){
+void Printer::printPlayers(const LaneStruct& lane) const {
+    for (auto& player : lane.players_) {
         printPlayer(player);
-        printText("\n");
+        printData("\n");
     }
 }
 
-void Printer::printPlayer(Player & player){
-    if(!player.name.empty()) {
-        printText(player.name + " ");
+void Printer::printPlayer(const Player& player) const {
+    if (!player.name_.empty()) {
+        printData(player.name_ + " ");
     }
-    printText(player.score);
+    printData(player.score_);
 }
-
-

@@ -5,10 +5,10 @@
 
 #include "printerStream.hpp"
 
-class ConsoleStream : public PrinterStream{
+class ConsoleStream : public PrinterStream {
 public:
-    void print(std::string stream) override;
-    void print(size_t value) override;
+    void print(const std::string& stringToPrint) override;
+    void print(size_t valueToPrint) override;
     std::string str() const;
 
 private:

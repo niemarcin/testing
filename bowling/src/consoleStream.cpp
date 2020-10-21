@@ -1,11 +1,11 @@
 #include "consoleStream.hpp"
 
-void ConsoleStream::print(std::string stream){
-    stream_ << stream;
+void ConsoleStream::print(const std::string& stringToPrint) {
+    stream_ << stringToPrint;
 }
 
-void ConsoleStream::print(size_t value){
-    stream_ << value;
+void ConsoleStream::print(size_t valueToPrint) {
+    stream_ << valueToPrint;
 }
 
 std::string ConsoleStream::str() const {

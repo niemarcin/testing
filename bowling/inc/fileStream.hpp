@@ -2,17 +2,17 @@
 
 #include "printerStream.hpp"
 
-#include <string>
 #include <fstream>
+#include <string>
 
-class FileStream : public PrinterStream{
+class FileStream : public PrinterStream {
 public:
-    FileStream(std::string filePath);
+    FileStream(const std::string& filePath);
     ~FileStream();
 
-    void print(std::string stream) override;
-    void print(size_t value) override;
+    void print(const std::string& stringToPrint) override;
+    void print(size_t valueToPrint) override;
 
 private:
-    std::ofstream * file_;
+    std::ofstream* file_;
 };

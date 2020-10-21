@@ -6,20 +6,19 @@
 #include <string>
 #include <vector>
 
-
-class Printer{
+class Printer {
 public:
-    Printer(PrinterStream * stream) : stream_(stream){};
-    void print(std::vector<LaneStruct> lanes);
+    Printer(PrinterStream* stream) : stream_(stream){};
+    void print(const std::vector<LaneStruct>& lanes);
 
 private:
-    void printHeader(LaneStruct & lane);
-    void printText(std::string text);
-    void printText(size_t value);
-    std::string parseStatus(const Status status);
-    void printPlayers(LaneStruct & lane);
-    void printPlayer(Player & player);
+    void printHeader(const LaneStruct& lane) const;
+    void printData(std::string text) const;
+    void printData(size_t value) const;
+    std::string parseStatus(const Status status) const;
+    void printPlayers(const LaneStruct& lane) const;
+    void printPlayer(const Player& player) const;
 
 private:
-    PrinterStream * stream_;
+    PrinterStream* stream_;
 };

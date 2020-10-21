@@ -2,8 +2,9 @@
 
 #include <string>
 
-class PrinterStream{
+class PrinterStream {
 public:
-    virtual void print(std::string stream) = 0;
-    virtual void print(size_t value) = 0;
+    virtual ~PrinterStream() {}
+    virtual void print(const std::string& stringToPrint) = 0;
+    virtual void print(size_t valueToPrint) = 0;
 };
