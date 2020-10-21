@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
             Game game;
             for(const auto& el : parsed.second){
                 std::cout << el <<';';
-                game.roll(int(el));
+                game.roll(el);
             }
             std::cout <<"\n\t\tscore: " << game.score();
             game.reset();
